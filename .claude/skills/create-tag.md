@@ -1,7 +1,7 @@
 # Skill: create-tag
 
 Step-by-step workflow for adding new tags or tag-types to a tag content
-package in `zerobias-com/tag`. Companion to [CLAUDE.md](../../CLAUDE.md).
+package in `zerobias-org/tag`. Companion to [CLAUDE.md](../../CLAUDE.md).
 
 ## When to use
 
@@ -117,7 +117,7 @@ Open a PR against `main` (the repo flows through main → uat → qa → dev syn
 After merge:
 
 ```bash
-gh run list --repo zerobias-com/tag --branch main --limit 3
+gh run list --repo zerobias-org/tag --branch main --limit 3
 ```
 
 The `Publish` workflow's `detect` job picks up changed packages, the matrix `publish (<package>)` step runs `zbb publish` (gate-stamp preflight → `npm publish --tag next` → cumulative promote to `dev`/`qa`/`uat`/`latest`), and `sync` rebases the protected branches.
@@ -125,7 +125,7 @@ The `Publish` workflow's `detect` job picks up changed packages, the matrix `pub
 Check npm dist-tags:
 
 ```bash
-npm dist-tag ls @zerobias-com/tag-zerobias-global-tags
+npm dist-tag ls @zerobias-org/tag-zerobias-global-tags
 # expect dev/qa/uat/latest all on the new version
 ```
 
