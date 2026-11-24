@@ -1,0 +1,22 @@
+{
+  "name": "@zerobias-org/tag-bundle",
+  "version": "0.0.1",
+  "lockfileVersion": 3,
+  "requires": true,
+  "packages": {
+    "": {
+      "name": "@zerobias-org/tag-bundle",
+      "version": "0.0.1",
+      "license": "ISC",
+      "dependencies": {
+        "@zerobias-com/tag-zerobias-global-tags": "1.0.0"
+      }
+    },
+    "node_modules/@zerobias-com/tag-zerobias-global-tags": {
+      "version": "1.0.0",
+      "resolved": "https://npm.pkg.github.com/download/@zerobias-com/tag-zerobias-global-tags/1.0.0/39fc287db1ab772d5e9403ede35a092a229e4caa",
+      "integrity": "sha512-Ag/RNdRuossmZquOrtrK8YGoXwXjoPNNr5W0pAIPuJ4vG2C7Xt7W4x/cGg7SnUiSZ1NHpb4CIjVLjqWz0ZTiKg==",
+      "license": "ISC"
+    }
+  }
+}

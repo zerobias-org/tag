@@ -1,0 +1,76 @@
+*.swp
+*.log
+*.log.gz
+*.class
+
+serverless.yml
+
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+
+# Package Files #
+*.jar
+!gradle/wrapper/gradle-wrapper.jar
+*.war
+*.ear
+
+# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
+hs_err_pid*
+
+# IDEA
+.idea
+*.iml
+*.ipr
+*.iws
+out/
+
+# JRebel
+rebel.xml
+rebel-remote.xml
+.rebel.xml.bak
+.rebel-remote.xml.bak
+
+# macOS
+.DS_Store
+
+# maven
+dependency-reduced-pom.xml
+target/
+test-output/
+
+# gradle
+build/
+.gradle
+gradle-local.properties
+.zbb-monorepo/
+.tags
+.lvimrc
+local.properties
+
+# Eclipse
+.classpath
+.settings
+.project
+
+# VSCode
+.vscode/
+
+# helm
+**/charts/**
+**/*.tgz
+
+# node
+node_modules/
+
+# Autogen
+.openapi-generator/
+generated/
+
+**/dist/**
+
+# Secrets
+**/.env
+.envrc
+
+# Nx
+.nx/

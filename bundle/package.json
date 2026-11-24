@@ -1,0 +1,23 @@
+{
+  "name": "@zerobias-org/tag-bundle",
+  "version": "0.0.4",
+  "description": "All installable tags",
+  "author": "team@zerobias.com",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:zerobias-org/tag.git",
+    "directory": "bundle/"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
+  },
+  "zerobias": {
+    "package": "bundle.all-tags",
+    "import-artifact": "bundle",
+    "dataloader-version": "1.0.0"
+  },
+  "dependencies": {
+    "@zerobias-com/tag-zerobias-global-tags": "2.0.5"
+  }
+}

@@ -1,0 +1,2 @@
+id: 81053c14-a8e5-4939-b538-c122c7d0eb1a
+description: Marks records as demo or non-production data within marketplace contexts. Used by visibility gates to hide demo records from non-admin users.

@@ -1,0 +1,2 @@
+description: Classifies a Task by work-item kind. Work-item taxonomy (what KIND of work), not a commit-type / change-type taxonomy. Tags here are the platform-default task-type labels; additional labels may be created ad hoc against this type once it is registered.
+color: '#10B981'
