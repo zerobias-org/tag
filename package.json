@@ -1,5 +1,5 @@
 {
-  "name": "@zerobias-com/tag",
+  "name": "@zerobias-org/tag",
   "version": "1.0.0",
   "private": true,
   "type": "module",
@@ -16,11 +16,11 @@
     "prepublish-init": "prepublish-init"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://pkg.zerobias.org"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/zerobias-com/tag.git"
+    "url": "git+https://github.com/zerobias-org/tag.git"
   },
   "author": "team@zerobias.com",
   "license": "ISC",

@@ -10,7 +10,7 @@
     "directory": "bundle/"
   },
   "publishConfig": {
-    "registry": "https://npm.pkg.github.com/"
+    "registry": "https://pkg.zerobias.org"
   },
   "zerobias": {
     "package": "bundle.all-tags",
@@ -18,6 +18,6 @@
     "dataloader-version": "1.0.0"
   },
   "dependencies": {
-    "@zerobias-com/tag-zerobias-global-tags": "2.0.5"
+    "@zerobias-org/tag-zerobias-global-tags": "3.0.0"
   }
 }

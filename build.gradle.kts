@@ -49,7 +49,7 @@ extra["contentValidator"] = { proj: org.gradle.api.Project ->
     // Tag packages live two levels deep — package/<scope>/<name>/.
     // The npm name and zerobias.package both derive from those two
     // segments via tag's specific formula:
-    //   npm name        = @zerobias-com/tag-<scope>-<name>
+    //   npm name        = @zerobias-org/tag-<scope>-<name>
     //   zerobias.package = <scope>.<name>.tag   (note the .tag suffix
     //                                             distinguishes from
     //                                             other artifact types)
@@ -58,7 +58,7 @@ extra["contentValidator"] = { proj: org.gradle.api.Project ->
     val pkgDoc = SchemaPrimitives.parseJson(projectDir.resolve("package.json"))
     SchemaPrimitives.requirePackageIdentity(
         pkgDoc,
-        expectedNpmName = "@zerobias-com/tag-$scope-$tagName",
+        expectedNpmName = "@zerobias-org/tag-$scope-$tagName",
         expectedZerobiasPackage = "$scope.$tagName.tag",
         field = "$tag package.json",
     )

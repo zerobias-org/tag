@@ -1,4 +1,4 @@
-name: "@zerobias-com/tag"
+name: "@zerobias-org/tag"
 version: "1.0.0"
 
 # Dataloader validation runs against an ephemeral Neon Postgres branch

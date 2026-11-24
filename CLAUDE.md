@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Overview
 
-This is the **closed-source tag content repository** under `@zerobias-com`. It hosts global tag artifacts that the ZeroBias platform's dataloader pulls in to populate the `tag` table on platform load.
+This is the **open-source tag content repository** under `@zerobias-org`. It hosts global tag artifacts that the ZeroBias platform's dataloader pulls in to populate the `tag` table on platform load.
 
-Today the repo contains a single tag package — `package/zerobias/global-tags` (npm: `@zerobias-com/tag-zerobias-global-tags`). The structure is built to support more in the future without code changes.
+Today the repo contains a single tag package — `package/zerobias/global-tags` (npm: `@zerobias-org/tag-zerobias-global-tags`). The structure is built to support more in the future without code changes.
 
 ## Essential Commands
 
@@ -46,7 +46,7 @@ Publishing is driven by the gradle `Publish` GitHub Actions workflow, triggered 
 
 ```bash
 # Manually trigger the workflow on a branch
-gh workflow run publish.yml --repo zerobias-com/tag --ref dev
+gh workflow run publish.yml --repo zerobias-org/tag --ref dev
 ```
 
 ## Architecture
@@ -57,7 +57,8 @@ A tag package's payload is **directory-based**, not file-based — each subdirec
 
 ```
 package/zerobias/global-tags/
-├── package.json                # zerobias.import-artifact = "tag"
+├── package.json                # zerobias.import-artifact = "tag"; zerobias.documentation = "README.md"
+├── README.md                   # the package's documentation (see Documentation below)
 ├── build.gradle.kts            # one-line marker: plugins { id("zb.content") }
 ├── gate-stamp.json             # written by ./gradlew :<pkg>:gate
 ├── env-type/                   # tag-type (directory name = Nmtoken)
@@ -74,6 +75,18 @@ package/zerobias/global-tags/
 └── other/
 ```
 
+### Documentation
+
+A package names the file that documents its tags, its `README.md`, in `zerobias.documentation` (a path from the
+package root), the same way pipeline templates do. The load stores it in file-service's shared catalog and links
+each tag to it (`documented_by`).
+
+- **Keep it at the package root.** The tag loader treats every *folder* of the package as a tag-type, so a `docs/`
+  folder would load as a tag-type named `docs`.
+- **Not linked yet:** the dataloader's tag handler doesn't apply documentation yet, so the field is read and ignored
+  until it does. The package loads either way.
+- Update the README when you add or remove a tag-type.
+
 ### What the validator enforces
 
 The dataloader is the source of truth for schema rules (UUID format on tag ids, Nmtoken regex on tag-type dir names, `description` non-blank, etc.). Re-validating those at gate time would just create drift risk — the full schema is exercised by `testIntegrationDataloader` against an ephemeral Neon Postgres branch as part of `gate`.
@@ -81,7 +94,7 @@ The dataloader is the source of truth for schema rules (UUID format on tag ids, 
 The inline validator at `build.gradle.kts` (`extra["contentValidator"]`) only enforces what the dataloader **cannot** or **does not** check:
 
 1. **Filesystem ↔ npm ↔ zerobias-block triangulation** — for a tag package at `package/{scope}/{name}/`:
-   - `package.json` `name` must equal `@zerobias-com/tag-{scope}-{name}`
+   - `package.json` `name` must equal `@zerobias-org/tag-{scope}-{name}`
    - `zerobias.package` (or legacy `auditmation.package`) must equal `{scope}.{name}.tag` (the `.tag` suffix distinguishes from other artifact types)
    - The dataloader reads `zerobias.package` but never the npm `name` field — a wrong name would publish under the wrong package and only surface in production. Implemented via `SchemaPrimitives.requirePackageIdentity`.
 2. **`zerobias.import-artifact` is `"tag"`** — sanity check against accidentally publishing as the wrong artifact type.
@@ -126,15 +139,15 @@ description: <human-readable description>
 
 ### Bumping the package version
 
-The package follows the gradle-era version line (currently `2.x.x`). The pre-gradle line was lerna-managed at `1.x.x`. Don't downgrade across the major boundary.
+The package is on the `3.x.x` line, which started when the repo moved from `zerobias-com/tag` (`@zerobias-com/tag-zerobias-global-tags`, `2.x.x`) to `zerobias-org/tag`. The move kept `zerobias.package` and every tag `id`, so 3.0.0 took over the same artifact on load. Earlier lines: `2.x.x` (gradle, zerobias-com) and `1.x.x` (lerna). Don't downgrade across a major boundary.
 
 ## Important Notes
 
-- **Authentication**: Set `ZB_TOKEN` (or `NPM_TOKEN` / `GITHUB_TOKEN`) for npm registry access; `NEON_API_KEY` + `NEON_PROJECT_ID` for the dataloader integration step (see `zbb.yaml`).
+- **Authentication**: Set `ZB_TOKEN` for npm registry access (`pkg.zerobias.org`); `NEON_API_KEY` + `NEON_PROJECT_ID` for the dataloader integration step (see `zbb.yaml`).
 - **Commit Format**: All commits must follow Conventional Commits specification.
-- **Private Registry**: Packages publish to `npm.pkg.github.com/@zerobias-com`.
+- **Registry**: Packages publish to `pkg.zerobias.org` under `@zerobias-org`.
 - **No Direct npm publish**: Publishing is driven by the gradle `Publish` workflow on push to `main`/`qa`/`dev`/`uat`; locally use `./gradlew :<pkg>:gate` to validate before push.
-- **Naming**: Package names follow `@zerobias-com/tag-<flat-package-path>` (e.g. `zerobias.global-tags` → `@zerobias-com/tag-zerobias-global-tags`).
+- **Naming**: Package names follow `@zerobias-org/tag-<flat-package-path>` (e.g. `zerobias.global-tags` → `@zerobias-org/tag-zerobias-global-tags`).
 
 ## See Also
 
